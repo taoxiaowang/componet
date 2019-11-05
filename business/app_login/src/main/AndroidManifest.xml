@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.app.login">
+
+    <application>
+        <activity
+            android:name="com.hikcreate.login.testLoginActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+    </application>
+
+</manifest>

@@ -1,0 +1,23 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.app.passport">
+
+    <application
+        android:roundIcon="@mipmap/ic_launcher"
+        android:allowBackup="false"
+        android:name="com.hikcreate.test.CommonApplication"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:icon="@mipmap/ic_launcher"
+        android:label="passport"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:replace="android:icon,android:roundIcon,android:theme,android:label,android:allowBackup">
+
+        <activity android:name="com.hikcreate.passport.testPassportActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    </application>
+</manifest>

@@ -1,0 +1,5 @@
+<resources>
+    <!-- Recognition screen margins, per the Android Design guidelines. -->
+    <dimen name="baidu_activity_horizontal_margin">16dp</dimen>
+    <dimen name="baidu_activity_vertical_margin">16dp</dimen>
+</resources>

@@ -1,0 +1,119 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+android {
+    compileSdkVersion build_config.compile_sdk
+    defaultConfig {
+        applicationId build_modele_app_id
+        minSdkVersion build_config.min_sdk
+        targetSdkVersion build_config.target_sdk
+        versionCode build_config.version_code
+        versionName build_config.version_name
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME  : project.getName(), AROUTER_GENERATE_DOC: "enable", //For ARouter
+                             "room.schemaLocation": "$projectDir/schemas".toString()]
+                //指定room.schemaLocation生成的文件路径
+            }
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+
+    def keystorePropertiesFile = rootProject.file("keystore.properties")
+    def keystoreProperties = new Properties()
+    keystoreProperties.load(new InputStreamReader(new FileInputStream(keystorePropertiesFile), "utf-8"))
+
+    packagingOptions {
+        exclude keystoreProperties['storeFile']
+    }
+
+    signingConfigs {
+        sign {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            zipAlignEnabled true
+            debuggable false
+            jniDebuggable false
+            minifyEnabled false
+            shrinkResources false
+            renderscriptDebuggable false
+            signingConfig signingConfigs.sign
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("boolean", "SHOW_LOG", "false")
+            buildConfigField("boolean", "SERVER_ADDRESS_ENABLE", "false")
+        }
+        debug {
+            minifyEnabled false
+            zipAlignEnabled true
+            debuggable true
+            jniDebuggable true
+            minifyEnabled false
+            shrinkResources false
+            renderscriptDebuggable true
+            signingConfig signingConfigs.sign
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("boolean", "SHOW_LOG", "true")
+            buildConfigField("boolean", "SERVER_ADDRESS_ENABLE", "true")
+        }
+    }
+
+    compileOptions {
+        encoding = 'utf-8'
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+        jumboMode = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+
+    dexOptions {
+        preDexLibraries = false
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':business_base:app_base')
+    if (isModule) {
+        api project(':business:app_login')
+        api project(':business:app_passport')
+    }
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+    // Optional, if you use support library fragments:
+    debugImplementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+}
+repositories {
+    mavenCentral()
+}
+

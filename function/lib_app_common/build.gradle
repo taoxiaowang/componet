@@ -1,0 +1,75 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion build_config.compile_sdk
+    defaultConfig {
+        minSdkVersion build_config.min_sdk
+        targetSdkVersion build_config.target_sdk
+        versionCode build_config.version_code
+        versionName build_config.version_name
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME  : project.getName(), AROUTER_GENERATE_DOC: "enable", //For ARouter
+                             "room.schemaLocation": "$projectDir/schemas".toString()]
+                //指定room.schemaLocation生成的文件路径
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        encoding = 'utf-8'
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    dexOptions {
+        preDexLibraries = false
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+
+    // App's support dependencies
+    api([
+            deps.appcompat,
+            deps.multidex,
+            deps.cardview,
+            deps.design,
+            deps.recyclerview,
+            deps.support_v4,
+            deps.guava
+    ])
+    // rx dependencies
+    api([
+            deps.retrofit2,
+            deps.retrofit2_converter_gson,
+            deps.retrofit2_converter_scalars,
+            deps.retrofit2_adapter_rxjava2,
+            deps.okhttp3_logging_interceptor,
+            deps.rxandroid2
+    ])
+
+    api deps.gson
+    api deps.androidsvg_aar
+    api deps.constraint_layout
+    api deps.glide
+    annotationProcessor deps.glide_compiler
+    api deps.jsbridge
+    api deps.otto
+    api deps.gson
+    api deps.eventbus
+    api deps.aRouterApi, { exclude group: 'com.android.support:appcompat-v7:25.2.0' }
+    annotationProcessor deps.aRouterCompiler
+}

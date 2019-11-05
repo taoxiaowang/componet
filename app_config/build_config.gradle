@@ -1,0 +1,19 @@
+
+//build_config 配置
+def build_config = [:]
+//android
+build_config.classpath_gradle = "com.android.tools.build:gradle:3.1.2"
+build_config.min_sdk = 19
+build_config.compile_sdk = 28
+build_config.build_tool = "27.0.3"
+build_config.target_sdk = 28
+build_config.classpath_kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.41"
+build_config.classpath_kotlin_extension = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.41"
+
+
+//需要每次发版休息的版本信息
+build_config.version_code = 162
+build_config.version_name = "1.6.2"
+
+
+ext.build_config = build_config

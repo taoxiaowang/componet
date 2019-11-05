@@ -1,0 +1,105 @@
+
+def versions = [:]
+// Support library
+versions.supportLibraryVersion  = "28.0.0"
+versions.multidexVersion  = "1.0.3"
+versions.guavaVersion  = "22.0-android"
+versions.constraintLayout = "1.1.3"
+// butterknife
+versions.butterknife = '8.8.1'
+// SmartRefreshLayout
+versions.smartRefreshLayout = '1.1.0-alpha-19'
+// alicloud push
+versions.alicloudPush = '3.1.4'
+// BackgroundLibrary
+versions.backgroundLibrary = '1.5.1'
+// qrcode
+versions.zxing = "3.3.3"
+// NumberPickerView
+versions.numberPickerView = '1.1.1'
+// ARouter
+versions.aRouterApi = '1.4.1'
+versions.aRouterCompiler = '1.2.2'
+// rx
+versions.retrofit2Version = '2.3.0'
+versions.rxandroidVersion = '2.0.2'
+versions.loggingInterceptor = '3.12.+'
+// json tool -- to do
+versions.fastJsonVersion = '1.2.6'
+versions.googleGsonVersion = '2.7'
+// permission need to use compileSdkVersion 27 or higher. -- to do
+versions.easyPermissions = '1.2.0'
+// Architecture Components dependencies
+versions.roomVersion = "1.1.1"
+versions.archLifecycleVersion = "1.1.1"
+// image
+versions.gliderVersion = "4.9.0"
+// jsbridge
+versions.jsbridge = '1.0.4'
+//LabelsView
+versions.labelsView='1.4.7'
+//svg
+versions.androidsvg = '1.3'
+//rating bar
+versions.materialratingbar = '1.3.2'
+//bannerView
+versions.bannerView = '1.4.8'
+// test -- to do
+versions.junitVersion = '4.12'
+versions.mockitoVersion = '1.10.19'
+versions.powerMockito = '1.6.2'
+versions.hamcrestVersion = '1.3'
+versions.runnerVersion = '1.0.2'
+versions.rulesVersion = '1.0.1'
+versions.espressoVersion = '3.0.2'
+// u meng
+versions.umengAnalytics = '8.0.0'
+versions.umengCommon = '2.0.0'
+//bugly tinker
+versions.multidex = '1.0.2'
+versions.tinkerVersion = '1.9.9'
+versions.bugly_crashreport ='1.3.8'
+versions.bugly_native_crashreport ='latest.release'
+versions.meituanWalle = '1.1.3'
+versions.eventbus = "3.1.1"
+versions.gson = "2.8.0"
+versions.arouter = "2.8.0"
+versions.aRouterApi = '1.4.1'
+versions.aRouterCompiler = '1.2.2'
+ext.versions = versions
+
+//deps依赖库
+ext.deps = [:]
+def deps = [:]
+
+deps.aRouterApi =  "com.alibaba:arouter-api:$versions.aRouterApi"
+deps.aRouterCompiler = "com.alibaba:arouter-compiler:$versions.aRouterCompiler"
+
+// App's support dependencies
+deps.appcompat = "com.android.support:appcompat-v7:$versions.supportLibraryVersion"
+deps.multidex = "com.android.support:multidex:$versions.multidexVersion"
+deps.cardview = "com.android.support:cardview-v7:$versions.supportLibraryVersion"
+deps.design =  "com.android.support:design:$versions.supportLibraryVersion"
+deps.recyclerview = "com.android.support:recyclerview-v7:$versions.supportLibraryVersion"
+deps.support_v4 =  "com.android.support:support-v4:$versions.supportLibraryVersion"
+deps.guava = "com.google.guava:guava:$versions.guavaVersion"
+
+// rx dependencies
+deps.retrofit2 = "com.squareup.retrofit2:retrofit:$versions.retrofit2Version"
+deps.retrofit2_converter_gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit2Version"
+deps.retrofit2_converter_scalars =  "com.squareup.retrofit2:converter-scalars:$versions.retrofit2Version"
+deps.retrofit2_adapter_rxjava2 =  "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit2Version"
+deps.okhttp3_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.loggingInterceptor"
+deps.rxandroid2 =  "io.reactivex.rxjava2:rxandroid:$versions.rxandroidVersion"
+
+//third
+deps.androidsvg_aar =  "com.caverock:androidsvg-aar:$versions.androidsvg"
+deps.constraint_layout =  "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
+deps.glide = "com.github.bumptech.glide:glide:$versions.gliderVersion"//glide图片加载
+deps.glide_compiler = "com.github.bumptech.glide:compiler:$versions.gliderVersion"
+deps.jsbridge = "com.github.lzyzsd:jsbridge:$versions.jsbridge"//JsBridge
+deps.otto = 'com.squareup:otto:1.3.5'//otto消息总线
+deps.eventbus  = "org.greenrobot:eventbus:$versions.eventbus"
+deps.gson  = "com.google.code.gson:gson:$versions.gson"
+ext.deps = deps
+

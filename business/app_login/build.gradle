@@ -1,0 +1,70 @@
+if (isModule) {
+    apply plugin: 'com.android.library'
+} else {
+    apply plugin: 'com.android.application'
+}
+android {
+    defaultConfig {
+        if (!isModule) {
+            applicationId build_modele_app_id + "." + project.getName()
+        }
+        minSdkVersion build_config.min_sdk
+        targetSdkVersion build_config.target_sdk
+        versionCode build_config.version_code
+        versionName build_config.version_name
+        resourcePrefix build_modele_login_resourcePrefix
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME  : project.getName(), AROUTER_GENERATE_DOC: "enable", //For ARouter
+                             "room.schemaLocation": "$projectDir/schemas".toString()]
+                //指定room.schemaLocation生成的文件路径
+            }
+        }
+    }
+    compileSdkVersion build_config.compile_sdk
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+        jumboMode = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    dexOptions {
+        preDexLibraries = false
+    }
+    compileOptions {
+        encoding = 'utf-8'
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main {
+            if (!isModule) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java {
+                    exclude 'com/hikcreate/test/**'
+                }
+            }
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':business_base:app_base')
+    api project(':function:lib_app_common')
+}

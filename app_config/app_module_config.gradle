@@ -1,0 +1,12 @@
+
+//切换运行方式
+ext.isModule= true
+//壳app
+ext.build_modele_app_id = "com.module.hikcreate"
+//登录模块
+ext.build_modele_login_resourcePrefix = "lg_"
+//通行证模块
+ext.build_modele_passport_resourcePrefix = "passport_"
+//百度相关lib_module
+ext.build_modele_baidu_resourcePrefix = "baidu_"
+

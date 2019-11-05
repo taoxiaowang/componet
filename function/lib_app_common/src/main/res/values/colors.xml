@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="col_PatternLockNormalDotStateColor">#D0D3DB</color>
+    <color name="col_PatternLockNormalWrongStateColor">#E95E52</color>
+    <color name="col_PatternLockNormalWrongStrokeStateColor">#22E95E52</color>
+    <color name="col_PatternLockNormalCorrectLineStateColor">#4E91F9</color>
+    <color name="col_PatternLockNormalCorrectStrokeStateColor">#224E91F9</color>
+    <color name="col_PatternLock_Sure_Error">#E95E52</color>
+    <color name="col_PatternLock_Sure_Success">#4D4D4D</color>
+</resources>

@@ -1,0 +1,11 @@
+include ':app', ':function:lib_common_ui',
+        ':function_base:lib_network',
+        ':function:lib_app_common',
+        'business:app_passport',
+        'business:app_login',
+        ':business_base:lib_baidu_audiodect',
+        ':business_base:lib_baidu_facedect',
+        ':business_base:lib_baidu_textdect',
+        ':business_base:app_module_manager',
+        ':business_base:app_base',
+        ':buildsrc'

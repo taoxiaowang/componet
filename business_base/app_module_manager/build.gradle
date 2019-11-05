@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+android {
+    defaultConfig {
+        minSdkVersion build_config.min_sdk
+        targetSdkVersion build_config.target_sdk
+        versionCode build_config.version_code
+        versionName build_config.version_name
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    compileSdkVersion build_config.compile_sdk
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+        preDexLibraries = false
+        jumboMode = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        encoding = 'utf-8'
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation deps.multidex
+    implementation deps.rxandroid2
+    implementation deps.eventbus
+    implementation deps.gson
+}

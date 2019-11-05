@@ -1,0 +1,8 @@
+<!--
+  ~ Copyright (C) 2017 Baidu, Inc. All Rights Reserved.
+  -->
+<resources>
+    <string name="baidu_app_name">OCR_UI</string>
+    <string name="baidu_idCardLabel">身份证识别</string>
+    <string name="baidu_camera_permission_required">本功能需要相机权限！</string>
+</resources>

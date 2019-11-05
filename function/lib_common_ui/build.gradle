@@ -1,0 +1,20 @@
+apply plugin: 'com.android.library'
+
+android {
+    defaultConfig {
+        minSdkVersion build_config.min_sdk
+        targetSdkVersion build_config.target_sdk
+        versionCode build_config.version_code
+        versionName build_config.version_name
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        compileSdkVersion build_config.compile_sdk
+    }
+
+    dexOptions {
+        preDexLibraries = false
+    }
+}
+
+dependencies {
+    compileOnly fileTree(dir: 'libs', include: ['*.jar'])
+}

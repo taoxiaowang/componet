@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.hikcreate.library.app.ui.view.patternlock.PatternLockView
+        android:id="@+id/pattern_lock_view_tip"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        app:correctDotStateColor="#4E91F9"
+        app:correctDotStrokeStateColor="#00ffffff"
+        app:dotAnimationDuration="200"
+        app:dotCount="3"
+        app:dotNormalSize="6dp"
+        app:dotSelectedSize="6dp"
+        app:normalDotStateColor="#D0D3DB"
+        app:pathWidth="3dp"
+        app:correctLineStateColor="#00ffffff"
+        app:wrongLineStateColor="#00ffffff"
+        app:wrongDotStateColor="#E95E52"
+        app:wrongDotStrokeStateColor="#E95E52" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#4D4D4D"
+        android:textSize="14sp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pattern_lock_view_tip"
+        tools:text="请绘制您的手势密码"
+        android:id="@+id/pattern_lock_state_tv_view" />
+
+
+    <com.hikcreate.library.app.ui.view.patternlock.PatternLockView
+        android:id="@+id/pattern_lock_view_set"
+        app:layout_constraintTop_toBottomOf="@+id/pattern_lock_state_tv_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="66dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp" />
+
+
+</android.support.constraint.ConstraintLayout>
