@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (C) 2017 Baidu, Inc. All Rights Reserved.
-  -->
-<resources>
-    <color name="baidu_colorPrimary">#3F51B5</color>
-    <color name="baidu_colorPrimaryDark">#303F9F</color>
-    <color name="baidu_colorAccent">#FF4081</color>
-</resources>
