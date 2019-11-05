@@ -1,9 +1,11 @@
 package com.hikcreate.plugin
 
 import com.hikcreate.plugin.config.PluginConfig
+import com.hikcreate.plugin.extension.ChannelExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.internal.impldep.org.apache.ivy.util.FileUtil
 
 /**
  * 渠道发布的plugin类
@@ -15,6 +17,8 @@ class ChannelPlugin implements Plugin<Project> {
 
     final static String MAKE_CHANNEL_TASK = "makeChannel"
     final static String CLEAN_PROJECT_TASK = "cleanProject"
+    final static String COPY_TINKER_TASK = "copyTinkerFile"
+    final static String LIB_API_TASK = "androidlibdoc"
     //插件group名称
     final static String MAKE_CHANNEL_GROUP = "hikcreate"
 
@@ -35,19 +39,16 @@ class ChannelPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
-//        project.extensions.create('channel', ChannelExtension)
-        System.out.println("========================")
-        System.out.println("start make channel package hik gradle plugin!")
-        System.out.println("========================")
-        if(!hasInit){
+        project.extensions.create('channel', ChannelExtension)
+        if (!hasInit) {
             hasInit = true
-            bakApkPath = project.project.rootDir.path + bakApkPath
-            releaseApkPath = project.project.rootDir.path + releaseApkPath
             pythonShellPath = project.project.rootDir.path + pythonShellPath
             tinkerPath = project.project.rootDir.path + tinkerPath
         }
         makeChannelTake(project)
     }
+
+
 
     static def createFile(path, createIfNotExist) {
         def file = new File(path)
@@ -64,16 +65,13 @@ class ChannelPlugin implements Plugin<Project> {
         return file
     }
 
-    static def copyFile(fromPath, toPath, createDestIfNotExist) {
-
+    static def copyFilePath(fromPath, toPath, createDestIfNotExist) {
         def fromFile = new File(fromPath)
         def toPathFile = new File(toPath)
-
         if (toPathFile.exists()) {
             toPathFile.deleteDir()
         }
         toPathFile.mkdirs()
-
         if (!fromFile.exists()) {
             return false
         }
@@ -81,14 +79,20 @@ class ChannelPlugin implements Plugin<Project> {
         listFiles.each { file ->
             if (file.isFile()) {
                 def toFile = createFile(toPath + "/" + file.getName(), createDestIfNotExist)
-                toFile.withWriter { ffile ->
-                    file.eachLine { line ->
-                        ffile.writeLine(line)
-                    }
-                }
+                copyFile(file, toFile)
             } else {
-                copyFile(file.getPath(), toPath + "/" + file.getName(), true)
+                copyFilePath(file.getPath(), toPath + "/" + file.getName(), true)
             }
+        }
+    }
+
+    static def copyFile(File src, File tar) {
+        InputStream is = new FileInputStream(src)
+        OutputStream os = new FileOutputStream(tar)
+        byte[] bytes = new byte[1024]
+        int len
+        while ((len = is.read(bytes)) != -1) {
+            os.write(bytes)
         }
     }
 
@@ -119,17 +123,20 @@ class ChannelPlugin implements Plugin<Project> {
         makeChannelTask.doLast {
             project.exec {
                 workingDir './'
-                commandLine "python", pythonShellPath, releaseApkPath, bakApkPath
+                def releasePath = project.project.rootDir.path + File.separator + project.channel.appName+ releaseApkPath
+                commandLine "python", pythonShellPath,releasePath ,project.channel.path360,project.channel.sdkBuildToolPath
             }
         }
         makeChannelTask.doLast {
             println 'gradle task 执行完毕...'
             println '拷贝tinker备份包到对应的目录...'
-            try {
-                copyFile(bakApkPath, tinkerPath, true)
-            } catch (Exception e) {
-                e.printStackTrace()
-            }
+            def bakApkPath = project.project.rootDir.path + File.separator + project.channel.appName+ bakApkPath
+            copyFilePath(bakApkPath, tinkerPath, true)
         }
+
+        //声明生成lib库api的task
+        Task libApiTask = project.task(LIB_API_TASK)
+        libApiTask.group = MAKE_CHANNEL_GROUP
     }
+
 }

@@ -7,8 +7,17 @@ package com.hikcreate.plugin.extension
  * @mail wangtao55@hikcreate.com
  */
 class ChannelExtension {
-    String releaseApkPath //产生的release包位置，用于后续加固以及制作渠道包
-    String bakApkPath //产生的tinker基准包路径
-    String pythonShellPath//python脚步文件的路径
-    String tinkerPath//tinker基准包拷贝
+    String path360 //360jar包位置
+    String sdkBuildToolPath //buildToolPath
+    String appName //编译工程的名称
 }
+
+/**
+ *
+ *
+ * channel{*     path360 "F:\\Develop\\电子驾照文档\\360jiagubao_windows_64\\jiagu"
+ *     sdkBuildToolPath "F:\\Develop\\sdk\\build-tools\\28.0.3"
+ *     appName "app"
+ * }
+
+ **/
